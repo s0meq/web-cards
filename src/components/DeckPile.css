@@ -16,6 +16,28 @@
     transform: translateY(-3px);
 }
 
+.deck-pile.shuffle {
+    animation: deck-shuffle 650ms ease-in-out;
+}
+
+@keyframes deck-shuffle {
+    0% {
+        transform: translateX(0) rotate(0deg);
+    }
+    25% {
+        transform: translateX(-6px) rotate(-3deg);
+    }
+    50% {
+        transform: translateX(6px) rotate(3deg);
+    }
+    75% {
+        transform: translateX(-4px) rotate(-2deg);
+    }
+    100% {
+        transform: translateX(0) rotate(0deg);
+    }
+}
+
 .card-back {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border: 2px solid #333;

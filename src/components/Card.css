@@ -13,6 +13,106 @@
     transition: transform 0.2s;
 }
 
+.card.card-flip {
+    padding: 0;
+    transform-style: preserve-3d;
+}
+
+.card.face-down {
+    padding: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.card.face-down .card-back-face {
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    border: 2px solid #333;
+    transform: none;
+}
+
+.card-face {
+    position: absolute;
+    inset: 0;
+    padding: 10px;
+    backface-visibility: hidden;
+    border-radius: 10px;
+}
+
+.card-front {
+    background: white;
+}
+
+.card-back-face {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: 2px solid #333;
+    transform: rotateY(180deg);
+}
+
+.card-back-pattern {
+    width: 100%;
+    height: 100%;
+    background-image:
+        repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.1) 10px, rgba(255,255,255,.1) 20px),
+        repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(255,255,255,.1) 10px, rgba(255,255,255,.1) 20px);
+    border-radius: 8px;
+    position: relative;
+}
+
+.card-back-pattern::after {
+    content: '🂠';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 60px;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.card-flyer {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 2000;
+    pointer-events: none;
+    animation: card-fly 650ms ease-in-out forwards;
+    transform-style: preserve-3d;
+}
+
+.card-flyer-return {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 2000;
+    pointer-events: none;
+    animation: card-fly-return 650ms ease-in-out forwards;
+    transform-style: preserve-3d;
+}
+
+@keyframes card-fly {
+    0% {
+        transform: translate3d(var(--from-x), var(--from-y), 0) rotateY(180deg) rotateZ(-6deg) scale(0.98);
+    }
+    50% {
+        transform: translate3d(calc((var(--from-x) + var(--to-x)) / 2), calc((var(--from-y) + var(--to-y)) / 2), 0) rotateY(90deg) rotateZ(0deg) scale(1.03);
+    }
+    100% {
+        transform: translate3d(var(--to-x), var(--to-y), 0) rotateY(0deg) rotateZ(0deg) scale(1);
+    }
+}
+
+@keyframes card-fly-return {
+    0% {
+        transform: translate3d(var(--from-x), var(--from-y), 0) rotateY(0deg) rotateZ(4deg) scale(1);
+    }
+    50% {
+        transform: translate3d(calc((var(--from-x) + var(--to-x)) / 2), calc((var(--from-y) + var(--to-y)) / 2), 0) rotateY(90deg) rotateZ(0deg) scale(0.98);
+    }
+    100% {
+        transform: translate3d(var(--to-x), var(--to-y), 0) rotateY(180deg) rotateZ(0deg) scale(0.96);
+    }
+}
+
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);

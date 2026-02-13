@@ -8,13 +8,18 @@ const CardBack = ({ style }) => {
     );
 };
 
-export const DeckPile = ({ cardCount, onClick }) => {
+export const DeckPile = ({ cardCount, onClick, pileRef, className = '' }) => {
     // Show up to 5 cards in the pile for visual effect
     const visibleCards = Math.min(cardCount, 5);
     
     return (
         <div className="deck-pile-container">
-            <div className="deck-pile" onClick={cardCount > 0 ? onClick : null} style={{ cursor: cardCount > 0 ? 'pointer' : 'default' }}>
+            <div
+                className={`deck-pile ${className}`}
+                ref={pileRef}
+                onClick={cardCount > 0 ? onClick : null}
+                style={{ cursor: cardCount > 0 ? 'pointer' : 'default' }}
+            >
                 {[...Array(visibleCards)].map((_, index) => (
                     <CardBack 
                         key={index} 
